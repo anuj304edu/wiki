@@ -1,0 +1,33 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+
+{% endblock %}
+{% block body %}
+        <style>
+            .pagetitle {
+                margin-top: 20%;
+            }
+            textarea {
+                width: 80%;
+                height: 400px;
+            }
+        </style>
+        {% if Title %}
+        <script>
+            alert("Title Already Exist")
+        </script>
+        {% endif %}
+    <form action="{% url 'createnewpage' %}" method="post">
+        {% csrf_token %}
+        <p><label for="pagecontent">
+            <input class="pagetitle" type="text" name="pagetitle" 
+            placeholder="Title of New Page" autofocus>
+            </label></p><br>
+        <textarea id="pagecontent" name="pagecontent" placeholder="Write Content For New Page"></textarea>
+        <br>
+        <input type="submit" value="Save">
+    </form>
+
+{% endblock %}
