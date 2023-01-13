@@ -12,14 +12,14 @@ def search(request):
         list_entry = util.list_entries()
         if title in list_entry:
             return render(request, "encyclopedia/s_entry.html",{
-            "s_title": title, 
+            "s_title": title,
             "s_entry": util.get_entry(title)
             })
         elif title != "":
-            list_q = [i for i in list_entry if title in i.casefold()]
+            list_q = [i for i in list_entry if title.casefold() in i.casefold()]
             return render(request, "encyclopedia/results.html",{
                     "entries": list_q
-                })  
+                })
         else:
             return HttpResponseRedirect(reverse("index"))
 
@@ -33,7 +33,7 @@ def index(request):
 
 def s_entry(request, title):
     return render(request, "encyclopedia/s_entry.html", {
-        "s_title": title, 
+        "s_title": title,
         "s_entry": util.get_entry(title)
     })
 
@@ -49,15 +49,15 @@ def createnewpage(request):
             elif ptitle != "":
                 util.save_entry(ptitle, pcontent)
                 return render(request, "encyclopedia/s_entry.html", {
-                    "s_title": ptitle, 
+                    "s_title": ptitle,
                     "s_entry": util.get_entry(ptitle)
                     })
             else:
-                return HttpResponseRedirect(reverse("createnewpage")) 
+                return HttpResponseRedirect(reverse("createnewpage"))
         else:
             return render(request, "encyclopedia/createnewpage.html")
-        
-    
+
+
 def editpage(request, title):
     if request.method == "POST":
             ptitle = request.POST.get("pagetitle")
@@ -67,18 +67,18 @@ def editpage(request, title):
                 atitle = util.edit_entry(title, ptitle, pcontent)
                 if atitle in list_entry:
                     return render(request, "encyclopedia/editpage.html", {
-                        "s_title": ptitle, 
+                        "s_title": ptitle,
                         "s_entry": pcontent,
                         "Title": atitle
                         })
                 else:
                     return render(request, "encyclopedia/s_entry.html", {
-                    "s_title": ptitle, 
+                    "s_title": ptitle,
                     "s_entry": pcontent
                     })
     else:
         return render(request, "encyclopedia/editpage.html", {
-        "s_title": title, 
+        "s_title": title,
         "s_entry": util.get_entry(title)
     })
 
