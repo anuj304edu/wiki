@@ -86,3 +86,12 @@ def deletepage(request, title):
     if request.method == "POST":
         util.delete_entry(title)
         return HttpResponseRedirect(reverse("index"))
+        
+        
+def randompage(request):
+    list_entry = util.list_entries()
+    entry = random.choice(list_entry)
+    return render(request, "encyclopedia/s_entry.html", {
+            "s_title": entry, 
+            "s_entry": util.get_entry(entry)
+                    })
