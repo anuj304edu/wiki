@@ -2,13 +2,13 @@ import re
 
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
-
+import markdown2
 
 def list_entries():
     """
     Returns a list of all names of encyclopedia entries.
     """
-    _, filenames = default_storage.listdir("wiki/entries")
+    _, filenames = default_storage.listdir("entries")
     return list(sorted(re.sub(r"\.md$", "", filename)
                 for filename in filenames if filename.endswith(".md")))
 
@@ -19,7 +19,7 @@ def save_entry(title, content):
     content. If an existing entry with the same title already exists,
     it is replaced.
     """
-    filename = f"wiki/entries/{title}.md"
+    filename = f"entries/{title}.md"
     if default_storage.exists(filename):
         default_storage.delete(filename)
     default_storage.save(filename, ContentFile(content))
@@ -31,7 +31,7 @@ def get_entry(title):
     entry exists, the function returns None.
     """
     try:
-        f = default_storage.open(f"wiki/entries/{title}.md")
+        f = default_storage.open(f"entries/{title}.md")
         return f.read().decode("utf-8")
     except FileNotFoundError:
         return None
@@ -40,7 +40,7 @@ def delete_entry(title):
     """
     delete an encyclopedia entry, given its title.
     """
-    filename = f"wiki/entries/{title}.md"
+    filename = f"entries/{title}.md"
     if default_storage.exists(filename):
         default_storage.delete(filename)
 
@@ -48,10 +48,11 @@ def edit_entry(title, newtitle, content=""):
     """
     edit an encyclopedia entry, given its title.
     """
-    newfilename = f"wiki/entries/{newtitle}.md"
-    filename = f"wiki/entries/{title}.md"
+    newfilename = f"entries/{newtitle}.md"
+    filename = f"entries/{title}.md"
     default_storage.delete(filename)
     if default_storage.exists(newfilename):
         return title
     default_storage.save(newfilename, ContentFile(content))
+
 

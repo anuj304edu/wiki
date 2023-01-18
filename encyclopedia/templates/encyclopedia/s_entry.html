@@ -3,6 +3,7 @@
 {% block title %}
     Encyclopedia
 
+
 {% endblock %}
 
 {% block body %}
@@ -16,6 +17,7 @@
         <button type="submit">Delete</button>
     </form>
     <br>
-    <p>{{ s_entry }}</p>
+    <div>{{ s_entry |safe }}</div>
+          
 
 {% endblock %}

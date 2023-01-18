@@ -7,6 +7,7 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div class="row">
@@ -17,13 +18,9 @@
                     <input type="submit" name="submit" value="search">
                 </form>
                 <div>
-                    <a href="{% url 'index' %}">Home</a>
-                </div>
-                <div>
-                    <a href="{% url 'createnewpage' %}">Create New Page</a>
-                </div>
-                <div>
-                    <a href="{% url 'randompage' %}">Random Page</a>
+                    <li><a href="{% url 'index' %}" class="active">Home</a></li>
+                    <li><a href="{% url 'createnewpage' %}">Create New Page</a></li>
+                    <li><a href="{% url 'randompage' %}">Random Page</a></li>
                 </div>
                 {% block nav %}
                 {% endblock %}

@@ -1,7 +1,33 @@
+
+.row{
+    width: 100vw;
+    height: 50vh;
+}
+  
+  .row a {
+    background-color: white;
+    color: blue;
+    display:grid;
+    padding: 2px;
+    text-decoration:none;
+  }
+  
+  .row a:hover {
+    background-color: #ccc;
+  }
+  
+  .row a.active {
+    margin-top: 8px;
+    background-color: mediumblue;
+    color: white;
+  }
+
+
 body {
     margin: 0;
     background-color: white;
 }
+
 
 code {
     white-space: pre;
@@ -22,14 +48,14 @@ textarea {
 }
 
 .search {
-    width: 100%;
+    width: 15vw;
     font-size: 15px;
     line-height: 15px;
 }
 
 .sidebar {
-    background-color: #f0f0f0;
-    height: 100vh;
+    background-color: white;
+    height: 35vh;
     padding: 20px;
 }
 
